@@ -41,8 +41,8 @@ class DtcMapper private constructor() {
                     val v = when (val dtVal = p.second) {
                         null -> ""
                         is LocalDateTime -> dtVal.format(DtcEngine.datetimeFormatter(formatDatetime))
-                        is LocalTime -> dtVal.format(DtcEngine.datetimeFormatter(formatDate))
-                        is LocalDate -> dtVal.format(DtcEngine.datetimeFormatter(formatTime))
+                        is LocalTime -> dtVal.format(DtcEngine.datetimeFormatter(formatTime))
+                        is LocalDate -> dtVal.format(DtcEngine.datetimeFormatter(formatDate))
                         is Enum<*> -> dtVal.toString().trim().lowercase().replaceFirstChar { i -> i.uppercase() }
                         is Boolean -> if (dtVal.toString().trim().lowercase() == "true") "Ya" else "Tidak"
                         else -> dtVal.toString().trim()

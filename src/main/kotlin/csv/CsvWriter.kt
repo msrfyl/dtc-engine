@@ -4,11 +4,12 @@ import DtcEngine
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
 import com.fasterxml.jackson.dataformat.csv.CsvSchema
+import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
-class CsvWriter (private val data: MutableList<Any>) {
+class CsvWriter (private val data: MutableList<*>) {
 
     private var header: Array<String> = arrayOf()
     private var showHeader: Boolean = false
@@ -37,6 +38,7 @@ class CsvWriter (private val data: MutableList<Any>) {
             else -> {
                 val mapKeys: MutableList<String> = mutableListOf()
                 val dtToListMap = data.map { dt ->
+                    dt as Serializable
                     dt.javaClass.declaredFields
                         .filter { f ->
                             !f.annotations.any { a ->
